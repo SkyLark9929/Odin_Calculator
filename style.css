@@ -7,9 +7,10 @@
 
 /* || common styles */
 body{
-    margin: 0;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    margin: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,18 +22,22 @@ div{
 }
 
 button{
+    width: 8vh;
+    height: 8vh;
+
     background-repeat: no-repeat;
     background-position: center;
+
     font-family: 'MPLUS Rounded Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-size: 6vh;
-    box-sizing: border-box;
-    width: 8vh;
-    height: 8vh;
+    color: #ECEFF4;
     line-height: 8vh;
+
     border: solid #2E3440;
     border-radius: 2vh;
-    color: #ECEFF4;
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +49,9 @@ button{
 #calculator_container{
     width: 37vh;
     height: 63vh;
+
     border-radius: 2vh;
+
     display: flex;
     flex-wrap: wrap;
     align-content: space-evenly;
@@ -54,19 +61,23 @@ button{
 /* || display properties */
 
 #display {
-    box-sizing: border-box;
+    width: 35vh;
+    height: 16vh;
+    
     font-family: 'MPLUS Rounded Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-size: 6vh;
     color: #ECEFF4;
+
+    box-sizing: border-box;
     border: solid #4C566A;
     background-color: #4C566A;
-    width: 35vh;
-    height: 16vh;
     border-radius: 2vh;
 }
 
-/* || buttons */
+/* || buttons properties*/
+
+/* || || properties for button types */
 
 .number_div{
     box-sizing: border-box;
@@ -90,6 +101,7 @@ button{
     background-color: #5E81AC;
 }
 
+/* || || properties for individual buttons */
 #backspace{
     background-image: url('assets/Backspace.svg');
 }
