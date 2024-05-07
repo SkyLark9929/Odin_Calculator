@@ -7,10 +7,11 @@ let result;
 
 let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
+let clearBtn = document.querySelector('#clear');
 let equalsBtn = document.querySelector('#equals');
 
 
-// adding event listeners to all buttons
+// adding event listeners to digit buttons
 digitButtons = document.querySelectorAll('.digit');
 for (button of digitButtons){
     button.addEventListener('click', queueDigit);
@@ -24,6 +25,8 @@ equalsBtn.addEventListener('click', calculate);
 equalsBtn.addEventListener('click', displayEquals);
 equalsBtn.addEventListener('click', initializeOperators);
 
+// adding event listeners to clear button
+clearBtn.addEventListener('click', clearAll);
 
 // adding event listeners to operators
 initializeOperators();
@@ -102,3 +105,14 @@ function calculate(){
     operandQueue = result; // automatically stores result into the operand queue
     console.log(`Result: ${result}`)
 };
+
+// clear all
+function clearAll(){
+    operandQueue = '';
+    operator = '';
+    firstOperand = '';
+    secondOperand = '';
+    displayContents = '';
+    displayCurrent.textContent = '';
+    result = '';
+}
