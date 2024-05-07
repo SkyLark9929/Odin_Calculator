@@ -73,6 +73,31 @@ button{
     border: solid #4C566A;
     background-color: #4C566A;
     border-radius: 2vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.display_inner {
+    height: 8vh;
+
+    font-family: 'MPLUS Rounded Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    box-sizing: border-box;
+    border: solid #4C566A;
+    background-color: #4C566A;
+    border-radius: 2vh;
+}
+
+#display_current {
+    font-weight: bold;
+    font-size: 6vh;
+    color: #ECEFF4;
+}
+
+#display_previous {
+    font-size: 4vh;
+    color: #ECEFF4;
 }
 
 /* || buttons properties*/
