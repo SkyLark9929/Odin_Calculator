@@ -147,6 +147,25 @@ button{
     border-color: #ECEFF4;
 }
 
+#dot{
+    border-color: #3b4252;
+    background-color: #3b4252;
+}
+
+#dot:hover{
+    border-color: #4C566A;
+    background-color: #4C566A;
+}
+
+#dot:hover > div{
+    border-color: #4C566A;
+    background-color: #4C566A;
+}
+
+#dot:active{
+    border-color: #ECEFF4;
+}
+
 .operator{
     border-color: #5E81AC;
     background-size: 4vh;

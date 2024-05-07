@@ -9,6 +9,7 @@ let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
 let equalsBtn = document.querySelector('#equals');
 let clearBtn = document.querySelector('#clear');
+let dotBtn = document.querySelector('#dot');
 
 
 // adding event listeners to digit buttons
@@ -17,6 +18,10 @@ for (button of digitButtons){
     button.addEventListener('click', queueDigit);
     button.addEventListener('click', displayButtonContents);
 };
+
+//adding event listeners to dot
+dotBtn.addEventListener('click', displayButtonContents, {once: true});
+dotBtn.addEventListener('click', queueDigit, {once: true});
 
 // adding event listeners to equals button
 equalsBtn.addEventListener('click', getOperand);
@@ -55,10 +60,13 @@ function getOperand(){
 
 
 function getOperator(e){
-    operator = e.target.value;
+    operator = e.currentTarget.value;
 };
 
 function triggerCalculate(e){
+    dotBtn.addEventListener('click', queueDigit, {once: true});
+    dotBtn.addEventListener('click', displayButtonContents, {once: true});
+
     if(secondOperand != ''){
         calculate();
         console.log('Calculate triggered!');
