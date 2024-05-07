@@ -15,6 +15,7 @@ let dotBtn = document.querySelector('#dot');
 displayCurrent.textContent = displayContents;
 
 // FIXME multiple operators can be placed on the screen.
+// FIXME screen overflow upon number entering
 
 // adding event listeners to digit buttons
 digitButtons = document.querySelectorAll('.digit');
