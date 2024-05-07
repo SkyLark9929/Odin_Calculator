@@ -59,7 +59,7 @@ function getOperator(e){
 };
 
 function triggerCalculate(e){
-    if(operator != ''){
+    if(secondOperand != ''){
         calculate();
         console.log('Calculate triggered!');
 
@@ -93,13 +93,13 @@ function displayButtonContents(e){
 // calculation functions only calculates
 function calculate(){
     if (operator == '+'){
-        result = Number(firstOperand) + Number(secondOperand);
+        result = (Number(firstOperand) + Number(secondOperand)).toFixed(2);
     } else if (operator == '-'){
-        result = Number(firstOperand) - Number(secondOperand);
+        result = (Number(firstOperand) - Number(secondOperand)).toFixed(2);
     } else if (operator == '*'){
-        result = Number(firstOperand) * Number(secondOperand);
+        result = (Number(firstOperand) * Number(secondOperand)).toFixed(2);
     } else if (operator == '/'){
-        result = Number(firstOperand) / Number(secondOperand);
+        result = (Number(firstOperand) / Number(secondOperand)).toFixed(2);
     };
 };
 
