@@ -70,8 +70,8 @@ button{
     color: #ECEFF4;
 
     box-sizing: border-box;
-    border: solid #4C566A;
-    background-color: #4C566A;
+    border: solid #3b4252;
+    background-color: #3b4252;
     border-radius: 2vh;
 
     display: flex;
@@ -84,8 +84,8 @@ button{
     font-family: 'MPLUS Rounded Bold', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     box-sizing: border-box;
-    border: solid #4C566A;
-    background-color: #4C566A;
+    border: solid #3b4252;
+    background-color: #3b4252;
     border-radius: 2vh;
 }
 
@@ -105,9 +105,12 @@ button{
 /* || || properties for button types */
 
 .number_div{
+    height: 7vh;
+    vertical-align: middle;
+    line-height: 7vh;
     box-sizing: border-box;
     border: none;
-    background-color: #4C566A;
+    background-color: #3b4252;
 }
 
 .function_button{
@@ -117,9 +120,31 @@ button{
     border-color: #D08770;
 }
 
+.function_button:hover{
+    background-color: #da9e8b;
+    border-color: #da9e8b;
+}
+
+.function_button:active{
+    border-color: #ECEFF4;
+}
+
 .digit{
+    border-color: #3b4252;
+    background-color: #3b4252;
+}
+
+.digit:hover{
     border-color: #4C566A;
     background-color: #4C566A;
+}
+.digit:hover > div{
+    border-color: #4C566A;
+    background-color: #4C566A;
+}
+
+.digit:active{
+    border-color: #ECEFF4;
 }
 
 .operator{
@@ -128,10 +153,29 @@ button{
     background-color: #5E81AC;
 }
 
+.operator:hover{
+    border-color: #81a1c1;
+    background-color: #81a1c1;
+}
+
+.operator:active{
+    border-color: #ECEFF4;
+}
+
 .equals{
     border-color: #5E81AC;
     background-size: 4vh;
     background-color: #5E81AC;    
+}
+
+.equals:hover{
+    border-color: #81a1c1;
+    background-size: 4vh;
+    background-color: #81a1c1;    
+}
+
+.equals:active{
+    border-color: #ECEFF4;
 }
 
 /* || || properties for individual buttons */
