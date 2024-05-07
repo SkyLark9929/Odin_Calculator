@@ -114,5 +114,6 @@ function clearAll(){
     secondOperand = '';
     displayContents = '';
     displayCurrent.textContent = '';
+    displayPrevious.textContent = '';
     result = '';
 }
