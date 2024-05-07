@@ -1,8 +1,8 @@
 let displayContents = '';
 let operator = '';
 let operandQueue = '';
-let firstOperand;
-let secondOperand;
+let firstOperand = '';
+let secondOperand = '';
 let result;
 
 let displayCurrent = document.querySelector('#display_current');
@@ -18,26 +18,18 @@ for (button of digitButtons){
 };
 
 // adding event listeners to equals button
-equalsBtn.addEventListener('click', getSecondOperand);
+equalsBtn.addEventListener('click', getOperand);
 equalsBtn.addEventListener('click', displayButtonContents);
-equalsBtn.addEventListener('click', calculate);
+equalsBtn.addEventListener('click', triggerCalculate);
 equalsBtn.addEventListener('click', displayEquals);
-equalsBtn.addEventListener('click', initializeOperators);
-
 
 // adding event listeners to operators
-initializeOperators();
-
-function initializeOperators(){
-    operatorBtns = document.querySelectorAll('.operator');
-    for (button of operatorBtns){
-        button.addEventListener('click', getFirstOperand);
-        button.addEventListener('click', getOperator);
-        button.addEventListener('click', displayButtonContents);
-        button.addEventListener('click', disableOperators);
-    };
-
-    console.log(`Operators initialized`);
+operatorBtns = document.querySelectorAll('.operator');
+for (button of operatorBtns){
+    button.addEventListener('click', getOperand);
+    button.addEventListener('click', triggerCalculate);
+    button.addEventListener('click', getOperator);
+    button.addEventListener('click', displayOperators);
 };
 
 // digit functions
@@ -46,34 +38,49 @@ function queueDigit(e){
 }
 
 // operator functions
-function getFirstOperand(){
-    firstOperand = operandQueue;
+function getOperand(){
+    if (firstOperand == ''){
+        firstOperand = operandQueue;
+        console.log(`First operand ${firstOperand}`);
+    } else {
+        secondOperand = operandQueue;
+        console.log(`Second operand ${secondOperand}`);
+    };
+
     operandQueue = '';
-    console.log(`First operand ${firstOperand}`);
 }
 
-function getSecondOperand(e){
-    secondOperand = operandQueue;
-    operandQueue = '';
-    console.log(`Second operand ${secondOperand}`);
-}
 
 function getOperator(e){
     operator = e.target.value;
 };
 
-function disableOperators(){
-    for (button of operatorBtns){
-        button.removeEventListener('click', getFirstOperand);
-        button.removeEventListener('click', getOperator);
-        button.removeEventListener('click', displayButtonContents);
-        button.removeEventListener('click', disableOperators);
-    };
-};
+function triggerCalculate(e){
+    if(operator != ''){
+        calculate()
+        console.log('Calculate triggered!')
 
+        if(e.currentTarget.value == '='){
+            firstOperand = '';
+            operandQueue = result;
+            operator  = '';
+        } else {
+            operator = e.currentTarget.value;
+            firstOperand = result;
+        };
+
+        secondOperand = '';
+        console.log(`After calculate: First operand ${firstOperand}; Second operand ${secondOperand}; operator ${operator}`)
+    }
+}
 // display functions
 function displayButtonContents(e){
     displayContents += e.currentTarget.value;
+    displayCurrent.textContent = displayContents;
+};
+
+function displayOperators(){
+    displayContents = firstOperand + operator;
     displayCurrent.textContent = displayContents;
 };
 
@@ -83,7 +90,7 @@ function displayEquals(){
     displayCurrent.textContent = result;
 };
 
-// calculation functions
+// calculation functions only calculates
 function calculate(){
     if (operator == '+'){
         result = Number(firstOperand) + Number(secondOperand);
@@ -98,7 +105,4 @@ function calculate(){
         result = Number(firstOperand) / Number(secondOperand);
         displayCurrent.textContent = result;
     };
-
-    operandQueue = result; // automatically stores result into the operand queue
-    console.log(`Result: ${result}`)
 };
