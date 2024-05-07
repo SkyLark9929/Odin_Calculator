@@ -1,8 +1,9 @@
-let displayContents = '';
+let displayContents = '0';
 let operator = '';
-let operandQueue = '';
+let operandQueue = '0';
 let firstOperand = '';
 let secondOperand = '';
+let btnValue = '';
 let result;
 
 let displayCurrent = document.querySelector('#display_current');
@@ -11,6 +12,9 @@ let equalsBtn = document.querySelector('#equals');
 let clearBtn = document.querySelector('#clear');
 let dotBtn = document.querySelector('#dot');
 
+displayCurrent.textContent = displayContents;
+
+// FIXME multiple operators can be placed on the screen.
 
 // adding event listeners to digit buttons
 digitButtons = document.querySelectorAll('.digit');
@@ -94,7 +98,15 @@ function triggerCalculate(e){
 
 // display functions
 function displayButtonContents(e){
-    displayContents += e.currentTarget.value;
+    btnValue = e.currentTarget.value;
+    console.log(`btn_val: ${btnValue}`);
+
+    if(displayContents == 0){
+        displayContents = btnValue;
+        operandQueue = btnValue;
+    } else {
+        displayContents += btnValue;
+    }
     displayCurrent.textContent = displayContents;
 };
 
@@ -113,10 +125,10 @@ function calculate(){
 
 //clear All
 function clearAll(){
-    displayContents = '';
-    displayCurrent.textContent = '';
+    displayContents = '0';
+    displayCurrent.textContent = '0';
     displayPrevious.textContent = '';
-    firstOperand = '';
+    firstOperand = '0';
     secondOperand = '';
     operandQueue = '';
     operator = '';
