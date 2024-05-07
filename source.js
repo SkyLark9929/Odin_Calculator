@@ -27,9 +27,9 @@ equalsBtn.addEventListener('click', triggerCalculate);
 operatorBtns = document.querySelectorAll('.operator');
 for (button of operatorBtns){
     button.addEventListener('click', getOperand);
-    button.addEventListener('click', triggerCalculate);
-    button.addEventListener('click', getOperator);
-    button.addEventListener('click', displayOperators);
+    button.addEventListener('click', triggerCalculate); // we first try to trigger calculate, because the operator can already be defined
+    button.addEventListener('click', getOperator);      // after that we overwrite the operator
+    button.addEventListener('click', displayButtonContents);
 };
 
 //adding event listeners for clear button
@@ -60,8 +60,8 @@ function getOperator(e){
 
 function triggerCalculate(e){
     if(operator != ''){
-        calculate()
-        console.log('Calculate triggered!')
+        calculate();
+        console.log('Calculate triggered!');
 
         displayContents = [firstOperand, operator, secondOperand, '='].join('');
         displayPrevious.textContent = displayContents;
@@ -70,23 +70,23 @@ function triggerCalculate(e){
             firstOperand = '';
             operandQueue = result;
             operator  = '';
+            displayContents = result;
+            displayCurrent.textContent = displayContents;
         } else {
             operator = e.currentTarget.value;
             firstOperand = result;
+            displayContents = firstOperand;
+            displayCurrent.textContent = displayContents;
         };
 
         secondOperand = '';
         console.log(`After calculate: First operand ${firstOperand}; Second operand ${secondOperand}; operator ${operator}`)
-    }
-}
+    };
+};
+
 // display functions
 function displayButtonContents(e){
     displayContents += e.currentTarget.value;
-    displayCurrent.textContent = displayContents;
-};
-
-function displayOperators(){
-    displayContents = firstOperand + operator;
     displayCurrent.textContent = displayContents;
 };
 
@@ -94,16 +94,12 @@ function displayOperators(){
 function calculate(){
     if (operator == '+'){
         result = Number(firstOperand) + Number(secondOperand);
-        displayCurrent.textContent = result;
     } else if (operator == '-'){
         result = Number(firstOperand) - Number(secondOperand);
-        displayCurrent.textContent = result;
     } else if (operator == '*'){
         result = Number(firstOperand) * Number(secondOperand);
-        displayCurrent.textContent = result;
     } else if (operator == '/'){
         result = Number(firstOperand) / Number(secondOperand);
-        displayCurrent.textContent = result;
     };
 };
 
