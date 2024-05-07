@@ -22,7 +22,6 @@ for (button of digitButtons){
 equalsBtn.addEventListener('click', getOperand);
 equalsBtn.addEventListener('click', displayButtonContents);
 equalsBtn.addEventListener('click', triggerCalculate);
-equalsBtn.addEventListener('click', displayEquals);
 
 // adding event listeners to operators
 operatorBtns = document.querySelectorAll('.operator');
@@ -64,6 +63,9 @@ function triggerCalculate(e){
         calculate()
         console.log('Calculate triggered!')
 
+        displayContents = [firstOperand, operator, secondOperand, '='].join('');
+        displayPrevious.textContent = displayContents;
+
         if(e.currentTarget.value == '='){
             firstOperand = '';
             operandQueue = result;
@@ -86,12 +88,6 @@ function displayButtonContents(e){
 function displayOperators(){
     displayContents = firstOperand + operator;
     displayCurrent.textContent = displayContents;
-};
-
-function displayEquals(){
-    displayPrevious.textContent = displayContents;
-    displayContents = result;
-    displayCurrent.textContent = result;
 };
 
 // calculation functions only calculates
