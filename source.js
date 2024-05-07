@@ -10,7 +10,7 @@ let displayPrevious = document.querySelector('#display_previous');
 let equalsBtn = document.querySelector('#equals');
 
 
-// adding event listeners to all buttons
+// adding event listeners to digit buttons
 digitButtons = document.querySelectorAll('.digit');
 for (button of digitButtons){
     button.addEventListener('click', queueDigit);
