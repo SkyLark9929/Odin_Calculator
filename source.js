@@ -8,6 +8,7 @@ let result;
 let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
 let equalsBtn = document.querySelector('#equals');
+let clearBtn = document.querySelector('#clear');
 
 
 // adding event listeners to digit buttons
@@ -31,6 +32,9 @@ for (button of operatorBtns){
     button.addEventListener('click', getOperator);
     button.addEventListener('click', displayOperators);
 };
+
+//adding event listeners for clear button
+clearBtn.addEventListener('click', clearAll);
 
 // digit functions
 function queueDigit(e){
@@ -105,4 +109,15 @@ function calculate(){
         result = Number(firstOperand) / Number(secondOperand);
         displayCurrent.textContent = result;
     };
+};
+
+//clear All
+function clearAll(){
+    displayContents = '';
+    displayCurrent.textContent = '';
+    displayPrevious.textContent = '';
+    firstOperand = '';
+    secondOperand = '';
+    operandQueue = '';
+    operator = '';
 };
