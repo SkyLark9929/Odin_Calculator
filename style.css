@@ -111,7 +111,7 @@ button{
 }
 
 .function_button{
-    width: 17vh;
+    width: 35vh;
     background-color: #D08770;
     background-size: 8vh;
     border-color: #D08770;
@@ -128,11 +128,13 @@ button{
     background-color: #5E81AC;
 }
 
-/* || || properties for individual buttons */
-#backspace{
-    background-image: url('assets/Backspace.svg');
+.equals{
+    border-color: #5E81AC;
+    background-size: 4vh;
+    background-color: #5E81AC;    
 }
 
+/* || || properties for individual buttons */
 #clear{
     background-image: url('assets/clear.svg');
 }
