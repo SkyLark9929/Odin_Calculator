@@ -1,3 +1,5 @@
+import { parseMath } from './modules/simple-math-parser.js'
+
 let displayContents = '0';
 let operator = '';
 let operandQueue = '0';
