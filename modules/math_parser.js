@@ -1,85 +1,45 @@
-let expression = '6-4'
+let expression = '11-6*2+4'
+console.log(parseExpression(expression));
 
-function splitOnPlus(expression){ // takes a string, cause if its called, its called first
-    let output;
-    if(expression.includes('+')){
-        output = expression.split('+');
+function parseExpression(expression){
+    let stringsWithoutPlus;
+    if (expression.includes('+')){
+        stringsWithoutPlus = expression.split('+');
     } else {
-        output = [expression];
+        stringsWithoutPlus = [expression];
     };
-    return output; //this array consists of strings previously divided by + or just contains a string, if no plusses were in
+
+    let parsedString;
+    if (expression.includes('-')){
+        parsedString = stringsWithoutPlus.map(parseMinusExpression);
+    } else if (expression.includes('*')){
+        parsedString = stringsWithoutPlus.map(parseMultiplyExpression);
+    } else {
+        parsedString = stringsWithoutPlus;
+    };
+
+    return parsedString.reduce((accumulator, currentValue) => Number(accumulator)+Number(currentValue));    
 };
 
-function splitArrayOnMinus(member){
-    let output;
-    if (member.includes('-')){
-        output = member.split('-');
-    } else {
-        output = member;
-    }
+function parseMinusExpression(stringWithoutPlus){
+    stringsWithoutMinus = stringWithoutPlus.split('-')
+    let multipliedStrings;
 
-    return output;
+    if (stringWithoutPlus.includes('*')){
+        multipliedStrings = stringsWithoutMinus.map(parseMultiplyExpression);
+    } else {
+        multipliedStrings = stringsWithoutMinus;
+    };
+
+    let subtractedString = multipliedStrings.reduce((accumulator, currentValue) => accumulator-currentValue);
+
+    return subtractedString;
 };
 
-function splitArrayOnMultiply(member){
-    let output;
-    // if member is an object we map a split for * on it, if it is not an object, we bypass
-    if(typeof member == 'object'){
-        output = member.map((x) => {
-            if (x.includes('*')){
-                return x.split('*');
-            } else {
-                return x;
-            }
-        })
-    } else {
-        output = member;
-    }
-    return output;
+function parseMultiplyExpression(stringsWithoutMinus){
+    let stringWithoutAsterisk = stringsWithoutMinus.split('*');
+
+    let multiplicationResult = stringWithoutAsterisk.reduce((accumulator, currentValue) => accumulator*currentValue);
+
+    return multiplicationResult;
 };
-
-function multiplyParts(member){
-    let output
-    let initialValue = 1;
-    if (typeof member == 'object'){
-        output = member.map((x) => {
-            if (typeof x == 'object'){
-                return x.reduce((accumulator, currentValue) => accumulator * Number(currentValue), initialValue);
-            } else {
-                return x;
-            }
-        })
-    } else {
-        output = member;
-    }
-    
-    return output;
-}
-
-function subtractParts(member){
-    let output;
-    if (typeof member == 'object'){
-        output = member.reduce((accumulator, currentValue) => accumulator-currentValue);
-    } else {
-        output = member;
-    }
-    
-    return output;
-}
-
-function sumParts(parts){
-    let initialValue = 0;
-    return parts.reduce((accumulator, currentPart) => accumulator + Number(currentPart), initialValue)
-}
-
-function calculate(expression){
-    let temp_array = splitOnPlus(expression);
-    temp_array = temp_array.map(splitArrayOnMinus);
-    temp_array = temp_array.map(splitArrayOnMultiply);
-    temp_array = temp_array.map(multiplyParts);
-    temp_array = temp_array.map(subtractParts);
-    let sum = sumParts(temp_array)
-    return sum;
-};
-
-console.log(calculate(expression))
