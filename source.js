@@ -1,8 +1,8 @@
 import { parseMath } from "./modules/simple-math-parser.js";
 
-const digitOperatorRe = RegExp('(\\d+(\\.\\d+)*[+*\/-])');
-const digitOperatorDigitRe = RegExp('(\\d+(\\.\\d+)*[+*\/-]\\d+)');
-const decimalRe = RegExp('\\.\\d*$')
+const digitOperatorRe = RegExp('(\\d+(\\.\\d*)*[+*\/-])');
+const digitOperatorDigitRe = RegExp('(\\d+(\\.\\d*)*[+*\/-]\\d+)');
+const decimalRe = RegExp('\\.\\d*$');
 
 let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
