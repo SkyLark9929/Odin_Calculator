@@ -91,7 +91,9 @@ button{
 
 #display_current {
     font-weight: bold;
-    font-size: 6vh;
+    font-size: 4vh;
+    vertical-align: middle;
+    line-height: 8vh;
     color: #ECEFF4;
 }
 
