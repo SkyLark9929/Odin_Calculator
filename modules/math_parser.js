@@ -1,4 +1,4 @@
-let expression = '11-6*2+4'
+let expression = '11-6*2+4';
 console.log(parseExpression(expression));
 
 function parseExpression(expression){
@@ -23,12 +23,12 @@ function parseExpression(expression){
 
 function parseMinusExpression(stringWithoutPlus){
     stringsWithoutMinus = stringWithoutPlus.split('-')
-    let multipliedStrings;
+    let dividedStrings;
 
-    if (stringWithoutPlus.includes('*')){
-        multipliedStrings = stringsWithoutMinus.map(parseMultiplyExpression);
+    if (stringWithoutPlus.includes('/')){
+        dividedStrings = stringsWithoutMinus.map(parseMultiplyExpression);
     } else {
-        multipliedStrings = stringsWithoutMinus;
+        dividedStrings = stringsWithoutMinus;
     };
 
     let subtractedString = multipliedStrings.reduce((accumulator, currentValue) => accumulator-currentValue);
@@ -36,8 +36,12 @@ function parseMinusExpression(stringWithoutPlus){
     return subtractedString;
 };
 
-function parseMultiplyExpression(stringsWithoutMinus){
-    let stringWithoutAsterisk = stringsWithoutMinus.split('*');
+function parseDivisionExpression(stringsWithoutMinus){
+
+}
+
+function parseMultiplyExpression(stringWithoutDivision){
+    let stringWithoutAsterisk = stringWithoutDivision.split('*');
 
     let multiplicationResult = stringWithoutAsterisk.reduce((accumulator, currentValue) => accumulator*currentValue);
 
