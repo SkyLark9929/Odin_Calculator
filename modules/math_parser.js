@@ -1,4 +1,4 @@
-let expression = '1*2*3+1*3+1'
+let expression = '1+2+3'
 
 function sumParts(parts){
     let initialValue = 0;
@@ -6,8 +6,13 @@ function sumParts(parts){
 }
 
 function splitOnPlus(expression){ // takes a string, cause if its called, its called first
-    let partsSum = expression.split('+');
-    return partsSum; //this array consists of strings previously divided by +
+    let output;
+    if(expression.includes('+')){
+        output = expression.split('+');
+    } else {
+        output = [expression];
+    };
+    return output; //this array consists of strings previously divided by + or just contains a string, if no plusses were in
 };
 
 function splitStringOnMultiply(expression){ //takes a string
@@ -15,42 +20,35 @@ function splitStringOnMultiply(expression){ //takes a string
     return partsMultiply;
 };
 
-function splitArrayOnMultiply(array){
-    let multipliersGroup;
-    let output = [];
-    for(member of array){
-        multipliersGroup = member.split('*')
-        output.push(multipliersGroup);
+function splitArrayOnMultiply(member){
+    let output;
+    if (member.includes('*')){
+        output = member.split('*');
+    } else {
+        output = member;
     }
 
     return output;
 };
 
-function multiplyParts(arrayOfArraysAndDigits){
-    let result;
-    let output = [];
+function multiplyParts(member){
+    let output
     let initialValue = 1;
-    for(member of arrayOfArraysAndDigits){
-        if(typeof member == 'object'){ // check whether the member is a group, or it should be bypassed
-            result = member.reduce((accumulator, currentElement) => accumulator * Number(currentElement), initialValue);
-            output.push(result);
-        } else {
-            output.push(multipliersGroup);
-        }
-    };
+    if (typeof member == 'object'){
+        output = member.reduce((accumulator, currentValue) => accumulator * Number(currentValue), initialValue);
+    } else {
+        output = member;
+    }
     
     return output;
 }
 
 function calculate(expression){
-    if(expression.includes('+') && expression.includes('*')){
-        let dividedByPlusArray = splitOnPlus(expression);
-        let dividedByPlusAndAsteriskArray =  splitArrayOnMultiply(dividedByPlusArray);
-        let multipliedArray = multiplyParts(dividedByPlusAndAsteriskArray);
-        let sum = sumParts(multipliedArray)
-
-        return sum;
-    }
+    let dividedByPlusArray = splitOnPlus(expression);
+    let dividedByPlusAndAsteriskArray = dividedByPlusArray.map(splitArrayOnMultiply);
+    let multipliedArray = dividedByPlusAndAsteriskArray.map(multiplyParts);
+    let sum = sumParts(multipliedArray)
+    return sum;
 };
 
 console.log(calculate(expression))
