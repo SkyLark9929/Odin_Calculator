@@ -5,6 +5,7 @@ let firstOperand = '';
 let secondOperand = '';
 let btnValue = '';
 let result;
+let operatorRe = RegExp('(\\d+\\.*\\d[+*\/-])');
 
 let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
@@ -14,7 +15,6 @@ let dotBtn = document.querySelector('#dot');
 
 displayCurrent.textContent = displayContents;
 
-// FIXME multiple operators can be placed on the screen.
 // FIXME screen overflow upon number entering
 
 // adding event listeners to digit buttons
@@ -39,7 +39,7 @@ for (button of operatorBtns){
     button.addEventListener('click', getOperand);
     button.addEventListener('click', triggerCalculate); // we first try to trigger calculate, because the operator can already be defined
     button.addEventListener('click', getOperator);      // after that we overwrite the operator
-    button.addEventListener('click', displayButtonContents);
+    button.addEventListener('click', displayOperatorContents);
 };
 
 //adding event listeners for clear button
@@ -107,6 +107,23 @@ function displayButtonContents(e){
         operandQueue = btnValue;
     } else {
         displayContents += btnValue;
+        console.log(`displayContents = ${displayContents} ReTest = ${operatorRe.test(displayContents)}`);
+    }
+    displayCurrent.textContent = displayContents;
+};
+
+function displayOperatorContents(e){
+    btnValue = e.currentTarget.value;
+    console.log(`operator_btn_value: ${btnValue}`);
+
+    if(displayContents == 0){
+        displayContents = btnValue;
+        operandQueue = btnValue;
+    } else if(operatorRe.test(displayContents)){
+        displayContents = firstOperand + operator;
+    } else {
+        displayContents += btnValue;
+        console.log(`displayContents = ${displayContents} ReTest = ${operatorRe.test(displayContents)}`);
     }
     displayCurrent.textContent = displayContents;
 };
