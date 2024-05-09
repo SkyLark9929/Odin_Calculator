@@ -117,8 +117,7 @@ function displayOperatorContents(e){
     console.log(`operator_btn_value: ${btnValue}`);
 
     if(displayContents == 0){
-        displayContents = btnValue;
-        operandQueue = btnValue;
+        displayContents = 0 + btnValue;
     } else if(operatorRe.test(displayContents)){
         displayContents = firstOperand + operator;
     } else {
