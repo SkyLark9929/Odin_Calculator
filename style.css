@@ -99,6 +99,8 @@ button{
 
 #display_previous {
     font-size: 4vh;
+    vertical-align: middle;
+    line-height: 8vh;
     color: #ECEFF4;
 }
 
