@@ -87,6 +87,10 @@ button{
     border: solid #3b4252;
     background-color: #3b4252;
     border-radius: 2vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: flex-end;
 }
 
 #display_current {
