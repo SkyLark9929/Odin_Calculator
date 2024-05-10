@@ -118,7 +118,7 @@ button{
 }
 
 .function_button{
-    width: 35vh;
+    width: 17vh;
     background-color: #D08770;
     background-size: 8vh;
     border-color: #D08770;
@@ -204,6 +204,10 @@ button{
 /* || || properties for individual buttons */
 #clear{
     background-image: url('assets/clear.svg');
+}
+
+#backspace{
+    background-image: url('assets/Backspace.svg');
 }
 
 #plus{
