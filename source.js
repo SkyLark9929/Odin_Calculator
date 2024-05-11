@@ -9,6 +9,7 @@ let displayPrevious = document.querySelector('#display_previous');
 let equalsBtn = document.querySelector('#equals');
 let clearBtn = document.querySelector('#clear');
 let dotBtn = document.querySelector('#dot');
+let backspaceBtn = document.querySelector('#backspace');
 
 // listeners for digits
 let digits = document.querySelectorAll('.digit');
@@ -25,10 +26,13 @@ for (const operator of operators){
 // listeners for equals
 equalsBtn.addEventListener('click', displayResult);
 
-//listeners for clear
+// listeners for clear
 clearBtn.addEventListener('click', clearAll);
 
-//listeners for dot
+// listeners for backspace
+backspaceBtn.addEventListener('click', deleteCharacter);
+
+// listeners for dot
 dotBtn.addEventListener('click', displayDot);
 
 // display functions
@@ -69,4 +73,9 @@ function displayResult(e){
 function clearAll(){
     displayCurrent.textContent = '';
     displayPrevious.textContent = '';
-}
+};
+
+function deleteCharacter(){
+    const expression = displayCurrent.textContent;
+    displayCurrent.textContent = expression.slice(0, -1);
+};
