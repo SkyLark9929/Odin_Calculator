@@ -4,7 +4,7 @@ const digitOperatorRe = RegExp('(\\d+(\\.\\d*)*[+*\/-])');
 const digitOperatorDigitRe = RegExp('(\\d+(\\.\\d*)*[+*\/-]\\d+)');
 const decimalRe = RegExp('\\.\\d*$');
 const mousedown = new MouseEvent('mousedown');
-const keyArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', 'Enter', '='];
+const keyArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', 'Enter', '=', 'Backspace'];
 const keyDictionary = {
     'Enter':'#equals',
     '=':'#equals',
@@ -22,7 +22,9 @@ const keyDictionary = {
     '7':'#seven',
     '8':'#eight',
     '9':'#nine',
-    '0':'#zero'
+    '0':'#zero',
+    'Backspace':'#backspace',
+    'ClearAll':'#clear'
 };
 
 let sevenBtn = document.querySelector('#\\7');
@@ -33,8 +35,11 @@ let clearBtn = document.querySelector('#clear');
 let dotBtn = document.querySelector('#dot');
 let backspaceBtn = document.querySelector('#backspace');
 let body = document.querySelector('body');
+let controlState = false;
 
 // listener for keyboard support
+body.addEventListener('keydown', activateControl);
+body.addEventListener('keyup', deactivateControl);
 body.addEventListener('keydown', inputFromKeyboard);
 
 // listeners for digits
@@ -109,10 +114,27 @@ function deleteCharacter(){
 // keyboard support functions
 
 function inputFromKeyboard(e){
-    const key = String(e.key);
+    let key = String(e.key);
+    console.log(e.key)
     if (keyArray.includes(key)){
+        if(controlState && key == 'Backspace'){
+            key = 'ClearAll'
+        };
         const id = keyDictionary[key];
         document.querySelector(id).dispatchEvent(mousedown);
     };
 };
 
+function activateControl(e){
+    const key = String(e.key);
+    if (key == 'Control'){
+        controlState = true
+    };
+};
+
+function deactivateControl(e){
+    const key =String(e.key);
+    if (key == 'Control'){
+        controlState = false;
+    }
+}
