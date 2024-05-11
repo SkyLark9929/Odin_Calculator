@@ -3,37 +3,63 @@ import { parseMath } from "./modules/simple-math-parser.js";
 const digitOperatorRe = RegExp('(\\d+(\\.\\d*)*[+*\/-])');
 const digitOperatorDigitRe = RegExp('(\\d+(\\.\\d*)*[+*\/-]\\d+)');
 const decimalRe = RegExp('\\.\\d*$');
+const mousedown = new MouseEvent('mousedown');
+const keyArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '/', '*', 'Enter', '='];
+const keyDictionary = {
+    'Enter':'#equals',
+    '=':'#equals',
+    '+':'#plus',
+    '-':'#minus',
+    '*':'#multiply',
+    '/':'#divide',
+    '.':'#dot',
+    '1':'#one',
+    '2':'#two',
+    '3':'#three',
+    '4':'#four',
+    '5':'#five',
+    '6':'#six',
+    '7':'#seven',
+    '8':'#eight',
+    '9':'#nine',
+    '0':'#zero'
+};
 
+let sevenBtn = document.querySelector('#\\7');
 let displayCurrent = document.querySelector('#display_current');
 let displayPrevious = document.querySelector('#display_previous');
 let equalsBtn = document.querySelector('#equals');
 let clearBtn = document.querySelector('#clear');
 let dotBtn = document.querySelector('#dot');
 let backspaceBtn = document.querySelector('#backspace');
+let body = document.querySelector('body');
+
+// listener for keyboard support
+body.addEventListener('keydown', inputFromKeyboard);
 
 // listeners for digits
 let digits = document.querySelectorAll('.digit');
 for (const digit of digits){
-    digit.addEventListener('click', displayDigit);
+    digit.addEventListener('mousedown', displayDigit);
 };
 
 // listeners for operators
 let operators = document.querySelectorAll('.operator');
 for (const operator of operators){
-    operator.addEventListener('click', displayOperator);
+    operator.addEventListener('mousedown', displayOperator);
 };
 
 // listeners for equals
-equalsBtn.addEventListener('click', displayResult);
+equalsBtn.addEventListener('mousedown', displayResult);
 
 // listeners for clear
-clearBtn.addEventListener('click', clearAll);
+clearBtn.addEventListener('mousedown', clearAll);
 
 // listeners for backspace
-backspaceBtn.addEventListener('click', deleteCharacter);
+backspaceBtn.addEventListener('mousedown', deleteCharacter);
 
 // listeners for dot
-dotBtn.addEventListener('click', displayDot);
+dotBtn.addEventListener('mousedown', displayDot);
 
 // display functions
 function displayDigit(e){
@@ -79,3 +105,14 @@ function deleteCharacter(){
     const expression = displayCurrent.textContent;
     displayCurrent.textContent = expression.slice(0, -1);
 };
+
+// keyboard support functions
+
+function inputFromKeyboard(e){
+    const key = String(e.key);
+    if (keyArray.includes(key)){
+        const id = keyDictionary[key];
+        document.querySelector(id).dispatchEvent(mousedown);
+    };
+};
+
